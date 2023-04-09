@@ -52,6 +52,14 @@ export default function () {
 
             // Replace actual grade with question mark
             scoreDisplay.firstElementChild.textContent = '?';
+
+            // Add a tooltip on the score field
+            scoreDisplay.title = t('actual_grade_hidden');
+
+            jQuery(scoreDisplay).tooltip({
+                position: { my: 'bottom-5', at: 'top' },
+                tooltipClass: 'center bottom vertical'
+            });
         });
     });
 

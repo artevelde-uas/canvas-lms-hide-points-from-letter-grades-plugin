@@ -3,12 +3,14 @@
         "package": {
             "title": "Hides scores when using letter grades",
             "description": "Hides actual scores from students when using letter grades."
-        }
+        },
+        "actual_grade_hidden": "Actual grade hidden"
     },
     "nl": {
         "package": {
             "title": "Scores verbergen bij gebruik van letterscores",
             "description": "Verbergt de effectieve scores voor studenten bij gebruik van beoordeling in lettervorm."
-        }
+        },
+        "actual_grade_hidden": "Effectieve scores verborgen"
     }
 }
