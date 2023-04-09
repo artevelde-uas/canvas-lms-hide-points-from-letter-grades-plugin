@@ -1,5 +1,7 @@
 import { dom, router } from '@artevelde-uas/canvas-lms-app';
 
+import t from './i18n';
+
 
 export default function () {
 
@@ -47,5 +49,9 @@ export default function () {
         });
     });
 
-    return require('../package.json');
+    return {
+        ...require('../package.json'),
+        title: t('package.title'),
+        description: t('package.description')
+    };
 }
