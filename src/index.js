@@ -34,5 +34,18 @@ export default function () {
         });
     });
 
+    router.onRoute('courses.assignments', () => {
+        dom.onElementAdded('.assignment_group .grade-display', gradeDisplay => {
+            const letterGradeRegex = /^\s*(?<letter>[^\s%]+)\s*$/;
+            const letter = gradeDisplay.textContent.match(letterGradeRegex)?.groups?.letter;
+
+            if (letter === undefined) return;
+
+            const scoreDisplay = gradeDisplay.parentElement.querySelector('.score-display');
+
+            scoreDisplay.firstElementChild.textContent = '?';
+        });
+    });
+
     return require('../package.json');
 }
