@@ -14,7 +14,7 @@ export default function () {
 
             if (scoreValue === null) return;
 
-            const letterGradeRegex = /\d+(?:(?:\.|\,)\d+)?\s+\((?<letter>.+)\)/;
+            const letterGradeRegex = /^\s*\d+(?:(?:\.|\,)\d+)?\s+\((?<letter>.+)\)\s*$/;
             const letter = originalScore.textContent.match(letterGradeRegex)?.groups?.letter;
 
             if (letter === undefined) return;
