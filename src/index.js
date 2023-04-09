@@ -16,16 +16,19 @@ export default function () {
 
             if (scoreValue === null) return;
 
+            // Determine the letter grade
             const letterGradeRegex = /^\s*\d+(?:(?:\.|\,)\d+)?\s+\((?<letter>.+)\)\s*$/;
             const letter = originalScore.textContent.match(letterGradeRegex)?.groups?.letter;
 
             if (letter === undefined) return;
 
+            // Replace actual scores with just the letter grade
             scoreValue.textContent = letter;
             originalPoints.textContent = letter;
             originalScore.textContent = letter;
             whatIfScore.textContent = letter;
 
+            // Replace actual scores after resetting 'what-if' scores
             dom.onClassRemoved(grade, () => {
                 const textNode = grade.querySelector('.tooltip_wrap').previousSibling;
 
@@ -36,8 +39,10 @@ export default function () {
         });
     });
 
+    // Render on assignments page
     router.onRoute('courses.assignments', () => {
         dom.onElementAdded('.assignment_group .grade-display', gradeDisplay => {
+            // Determine the letter grade
             const letterGradeRegex = /^\s*(?<letter>[^\s%]+)\s*$/;
             const letter = gradeDisplay.textContent.match(letterGradeRegex)?.groups?.letter;
 
@@ -45,6 +50,7 @@ export default function () {
 
             const scoreDisplay = gradeDisplay.parentElement.querySelector('.score-display');
 
+            // Replace actual grade with question mark
             scoreDisplay.firstElementChild.textContent = '?';
         });
     });
