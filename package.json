@@ -1,6 +1,6 @@
 {
   "name": "@artevelde-uas/canvas-lms-hide-points-from-letter-grades-plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Hides points from students when using letter grades",
   "keywords": [
     "Canvas LMS"

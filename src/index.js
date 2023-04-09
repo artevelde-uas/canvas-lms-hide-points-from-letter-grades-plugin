@@ -1,5 +1,7 @@
 import { dom, router } from '@artevelde-uas/canvas-lms-app';
 
+import t from './i18n';
+
 
 export default function () {
 
@@ -14,16 +16,19 @@ export default function () {
 
             if (scoreValue === null) return;
 
+            // Determine the letter grade
             const letterGradeRegex = /^\s*\d+(?:(?:\.|\,)\d+)?\s+\((?<letter>.+)\)\s*$/;
             const letter = originalScore.textContent.match(letterGradeRegex)?.groups?.letter;
 
             if (letter === undefined) return;
 
+            // Replace actual scores with just the letter grade
             scoreValue.textContent = letter;
             originalPoints.textContent = letter;
             originalScore.textContent = letter;
             whatIfScore.textContent = letter;
 
+            // Replace actual scores after resetting 'what-if' scores
             dom.onClassRemoved(grade, () => {
                 const textNode = grade.querySelector('.tooltip_wrap').previousSibling;
 
@@ -34,5 +39,33 @@ export default function () {
         });
     });
 
-    return require('../package.json');
+    // Render on assignments page
+    router.onRoute('courses.assignments', () => {
+        dom.onElementAdded('.assignment_group .grade-display', gradeDisplay => {
+            // Determine the letter grade
+            const letterGradeRegex = /^\s*(?<letter>[^\s%]+)\s*$/;
+            const letter = gradeDisplay.textContent.match(letterGradeRegex)?.groups?.letter;
+
+            if (letter === undefined) return;
+
+            const scoreDisplay = gradeDisplay.parentElement.querySelector('.score-display');
+
+            // Replace actual grade with question mark
+            scoreDisplay.firstElementChild.textContent = '?';
+
+            // Add a tooltip on the score field
+            scoreDisplay.title = t('actual_grade_hidden');
+
+            jQuery(scoreDisplay).tooltip({
+                position: { my: 'bottom-5', at: 'top' },
+                tooltipClass: 'center bottom vertical'
+            });
+        });
+    });
+
+    return {
+        ...require('../package.json'),
+        title: t('package.title'),
+        description: t('package.description')
+    };
 }
