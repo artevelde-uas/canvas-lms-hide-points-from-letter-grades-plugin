@@ -42,12 +42,6 @@ export default function () {
     // Render on assignments page
     router.onRoute('courses.assignments', () => {
         dom.onElementAdded('.assignment_group .grade-display', gradeDisplay => {
-            // Determine the letter grade
-            const letterGradeRegex = /^\s*(?<letter>[^\s%]+)\s*$/;
-            const letter = gradeDisplay.textContent.match(letterGradeRegex)?.groups?.letter;
-
-            if (letter === undefined) return;
-
             const scoreDisplay = gradeDisplay.parentElement.querySelector('.score-display');
 
             // Replace actual grade with question mark
