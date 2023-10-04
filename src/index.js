@@ -57,6 +57,14 @@ export default function () {
         });
     });
 
+    // Remove scores from rubrics
+    router.onRoute('courses.assignments.*', () => {
+        // Remove elements with actual scores
+        dom.onElementAdded('.react-rubric .rating-points', ratingPoints => {
+            ratingPoints.remove();
+        });
+    });
+
     return {
         ...require('../package.json'),
         title: t('package.title'),
