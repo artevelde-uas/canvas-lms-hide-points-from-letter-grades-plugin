@@ -1,4 +1,4 @@
-import { dom, router } from '@artevelde-uas/canvas-lms-app';
+import { dom, router, auth } from '@artevelde-uas/canvas-lms-app';
 
 import t from './i18n';
 
@@ -58,7 +58,13 @@ export default function () {
     });
 
     // Remove scores from rubrics
-    router.onRoute('courses.assignments.*', () => {
+    router.onRoute('courses.assignments.*', async () => {
+        const isTeacher = await auth.isCourseTeacher();
+        const isAdmin = auth.isAdmin();
+
+        // Only apply fix for students
+        if (isTeacher || isAdmin) return;
+
         // Remove elements with actual scores
         dom.onElementAdded('.react-rubric .rating-points', ratingPoints => {
             ratingPoints.remove();
