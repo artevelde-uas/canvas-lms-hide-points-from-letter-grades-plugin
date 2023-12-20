@@ -44,6 +44,9 @@ export default function () {
         dom.onElementAdded('.assignment_group .grade-display', gradeDisplay => {
             const scoreDisplay = gradeDisplay.parentElement.querySelector('.score-display');
 
+            // Check if score element exists
+            if (scoreDisplay.firstElementChild === null) return;
+
             // Replace actual grade with question mark
             scoreDisplay.firstElementChild.textContent = '?';
 
@@ -52,7 +55,7 @@ export default function () {
 
             jQuery(scoreDisplay).tooltip({
                 position: { my: 'bottom-5', at: 'top' },
-                tooltipClass: 'center bottom vertical'
+                tooltipClass: 'center top vertical'
             });
         });
     });
