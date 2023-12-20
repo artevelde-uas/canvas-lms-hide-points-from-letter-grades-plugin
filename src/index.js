@@ -55,7 +55,7 @@ export default function () {
 
             jQuery(scoreDisplay).tooltip({
                 position: { my: 'bottom-5', at: 'top' },
-                tooltipClass: 'center bottom vertical'
+                tooltipClass: 'center top vertical'
             });
         });
     });
